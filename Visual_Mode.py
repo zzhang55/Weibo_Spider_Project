@@ -267,14 +267,15 @@ if not check_csv_writable():
 
 def find_and_store_mblogs(obj):
     if isinstance(obj, dict):
-        # 发现直接是mblog
+        # 1. 检查当前字典是不是一个 mblog
         if 'created_at' in obj and 'text' in obj:
             store_mblog(obj)
-        # 出现mblog字段，继续探查
-        if 'mblog' in obj and isinstance(obj['mblog'], dict):
-            store_mblog(obj['mblog'])
+            return  #如果是微博对象，处理完就返回，不需深入（除非微博里套微博，通常不需要）
+        
+        # 2. 如果不是，继续遍历它的所有值
         for v in obj.values():
             find_and_store_mblogs(v)
+            
     elif isinstance(obj, list):
         for item in obj:
             find_and_store_mblogs(item)
