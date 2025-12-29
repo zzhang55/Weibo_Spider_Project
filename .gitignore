@@ -1,0 +1,17 @@
+# Python system files
+__pycache__/
+*.py[cod]
+
+# Data files (Download results)
+images/
+videos/
+weibo_data.csv
+*.csv
+
+# User specific configuration (if any backup files exist)
+*.backup
+*.log
+
+# OS system files
+.DS_Store
+Thumbs.db
